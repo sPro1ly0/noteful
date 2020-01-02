@@ -1,0 +1,23 @@
+.side-navbar {
+    list-style: none;
+    border: 1px solid black;
+    width: 25%;
+    padding-top: 20px;
+}
+
+.side-navbar > li {
+    border: 1px solid black;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.side-navbar > button {
+    background-color: white;
+    text-align: center;
+    border: 1px solid black;
+    width: 90%;
+    margin: 8px 5%;
+    height: 40px;
+}

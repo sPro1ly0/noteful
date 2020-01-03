@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import MainSidebar from './MainSideBar';
 import NoteSidebar from './NoteSideBar';
 import './SideBar.css';
-import MainNoteList from './MainNoteList';
+
+import MainPage from './MainPage';
 import NotePage from './NotePage';
+
 import Store from './Dummy-Store';
 import { Route, Link } from 'react-router-dom';
 
@@ -21,7 +24,8 @@ class App extends Component {
   
   render() {
     const findNoteInfo = (notes, noteId) => notes.find(note => note.id === noteId);
-    const findFolder = (folders, folderId) => folders.find(folder => folder.id === folderId)
+    const findFolder = (folders, folderId) => folders.find(folder => folder.id === folderId);
+
     return (
       <div className='App'>
         <header>
@@ -59,7 +63,7 @@ class App extends Component {
                   exact path='/'
                   key={'/'}
                   render={(props) => {
-                    return <MainNoteList {...props} notes={this.state.notes}/>
+                    return <MainPage {...props} notes={this.state.notes}/>
                   }}/>
                 <Route
                   exact path='/folder/:folderId'
@@ -71,7 +75,7 @@ class App extends Component {
                           this.state.notes.filter(note => note.folderId === folderId)
                           : notes
                     )
-                    return (<MainNoteList
+                    return (<MainPage
                         {...routerProps} 
                         notes={findNotesInFolder(this.state.notes, folderId)} />
                     );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './MainNoteList.css';
 
 class NotePage extends Component {
     render() {

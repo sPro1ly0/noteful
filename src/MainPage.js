@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './MainNoteList.css';
+import './MainPage.css'
 import { Link } from 'react-router-dom';
 
-class MainNoteList extends Component {
+class MainPage extends Component {
     render() {
         const notesList = this.props.notes.map(note =>
             <li key={note.id}>
@@ -22,4 +22,4 @@ class MainNoteList extends Component {
     }
 }
 
-export default MainNoteList;
+export default MainPage;

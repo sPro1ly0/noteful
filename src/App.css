@@ -1,4 +1,21 @@
+h1 {
+    text-align: center;
+    font-weight: 500;
+}
+
 .main-section {
     display: flex;
     justify-content: space-around;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: orangered;
 }

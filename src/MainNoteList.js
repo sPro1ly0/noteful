@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
 import './MainNoteList.css';
+import { Link } from 'react-router-dom';
 
 class MainNoteList extends Component {
     render() {
+        const notesList = this.props.notes.map(note =>
+            <li key={note.id}>
+                <Link to={`/note/${note.id}`}><h2>{note.name}</h2></Link>
+                <div className='note-date-button'>
+                    <p>Date modified on {note.modified}</p>
+                    <button>Delete Note</button>
+                </div>
+            </li>
+        )
         return (
-            <main>
-                <li>
-                    <h2>Note 1</h2>
-                    <div className='note-date-button'>
-                        <p>Date</p>
-                        <button>Delete Note</button>
-                    </div>
-                </li>
-                <li>
-                    <h2>Note 1</h2>
-                    <div className='note-date-button'>
-                    <p>Date</p>
-                    <button>Delete Note</button>
-                    </div>
-                </li>
-                <li>
-                    <h2>Note 1</h2>
-                    <div className='note-date-button'>
-                    <p>Date</p>
-                    <button>Delete Note</button>
-                    </div>
-                </li>
+            <>
+                {notesList}
                 <button className='add-note-button'>Add Note</button>
-            </main>
+            </>
         )
     }
 }

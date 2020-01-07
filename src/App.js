@@ -25,15 +25,16 @@ class App extends Component {
       fetch(`http://localhost:9090/folders`),
       fetch(`http://localhost:9090/notes`)
     ])
-      .then(([res1, res2]) => 
-        [res1.json(), res2.json()]
-      )
-      .then(([data1, data2]) => {
-        this.setState({
-          folders: data1,
-          notes: data2
+      .then(([foldersResponse, notesResponse]) => {
+        return [foldersResponse.json(), notesResponse.json()]
       })
-        console.log(data1);
+      .then(([foldersData, notesData]) => {
+        this.setState({
+          folders: foldersData,
+          notes: notesData
+        });
+        console.log(foldersData);
+        console.log(notesData);
       }
         )
       .catch(error => {

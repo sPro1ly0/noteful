@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import NotesContext from './NotesContext';
 
 class MainSideBar extends Component {
+    static contextType = NotesContext;
+
     render() {
-        const folderList = this.props.folders.map((folder) =>
+        const folderList = this.context.folders.map((folder) =>
             <NavLink to ={`/folder/${folder.id}`} className="folder" key={folder.id}>{folder.name}</NavLink> 
         );
         console.log(folderList);

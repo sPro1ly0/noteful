@@ -26,17 +26,22 @@ class App extends Component {
       fetch(`http://localhost:9090/notes`)
     ])
       .then(([foldersResponse, notesResponse]) => {
-        return [foldersResponse.json(), notesResponse.json()]
+
+        return foldersResponse.json().then((foldersData) => {
+                  console.log(foldersData);
+                  this.setState({
+                    folders: foldersData
+                  });
+                }),
+        
+                notesResponse.json().then((notesData) => {
+                  console.log(notesData);
+                  this.setState({
+                    notes: notesData
+                  });
+                })
+
       })
-      .then(([foldersData, notesData]) => {
-        this.setState({
-          folders: foldersData,
-          notes: notesData
-        });
-        console.log(foldersData);
-        console.log(notesData);
-      }
-        )
       .catch(error => {
         console.log('Error', error)
         this.setState({

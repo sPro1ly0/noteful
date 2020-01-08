@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 
 import MainSidebar from './MainSideBar';
-//import NoteSidebar from './NoteSideBar';
+import NoteSidebar from './NoteSideBar';
 import './SideBar.css';
 
 import MainPage from './MainPage';
-//import NotePage from './NotePage';
+import NotePage from './NotePage';
 
 //import Store from './Dummy-Store';
 import { Route, Link } from 'react-router-dom';
@@ -32,7 +32,7 @@ class App extends Component {
                   this.setState({
                     folders: foldersData
                   });
-                }),
+                }) &&
         
                 notesResponse.json().then((notesData) => {
                   console.log(notesData);
@@ -48,22 +48,21 @@ class App extends Component {
           error: error.message
         })
       })
-  }
+  };
 
-  
+  handleDeleteNote = noteId => {
+    const newNotes =  this.state.notes.filter(note => note.id !== noteId);
+    this.setState({
+      notes: newNotes
+    });
+  };
+
   render() {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-    }
-
-    // const {folders, notes} = this.state;
-    // const findNoteInfo = (notes, noteId) => notes.find(note => note.id === noteId);
-    // const findFolder = (folders, folderId) => folders.find(folder => folder.id === folderId);
-    // const findNotesInFolder = (notes, folderId) => (
-    //   folderId 
-    //       ? notes.filter(note => note.folderId === folderId)
-    //       : notes)
+      deleteNote: this.handleDeleteNote,
+    };
 
     return (
       <div className='App'>
@@ -76,42 +75,35 @@ class App extends Component {
                   <Route 
                     exact path='/'
                     key={'/'}
-                    // render={() => {
-                    //   return <MainSidebar folders={folders} />
-                    // }}
                     component={MainSidebar}
                   />
-                  {/* <Route 
+                  <Route 
                     exact path='/folder/:folderId'
                     key={'/folder/:folderId'}
-                    // render={() => {
-                    //   return <MainSidebar folders={folders} />
-                    // }}
                     component={MainSidebar}
                   />
                   <Route 
                     exact path='/note/:noteId'
                     key={'/note/:noteId'}
+                    component={NoteSidebar}
                     // render={(routerProps) => {
                     //     const {noteId} = routerProps.match.params;
                     //     const note = findNoteInfo(notes, noteId) || {};
                     //     const folder = findFolder(folders, note.folderId);
                     //     return <NoteSidebar {...routerProps} folder={folder}/> }}
-                    component={NoteSidebar}
-                  /> */}
+                    
+                  />
               </div>
               <main>
                   <Route 
                     exact path='/'
                     key={'/'}
-                    // render={(props) => {
-                    //   return <MainPage {...props} notes={notes}/>
-                    // }}
                     component={MainPage}
                     />
-                  {/* <Route
+                  <Route
                     exact path='/folder/:folderId'
                     key={'/folder/:folderId'}
+                    component={MainPage}
                     // render={(routerProps) => {
                     //     const {folderId} = routerProps.match.params;
                     //     const notesInFolder = findNotesInFolder(notes, folderId);
@@ -120,11 +112,11 @@ class App extends Component {
                     //       notes={notesInFolder} />
                     //   );
                     // }}
-                    component={MainPage}
                   />
                   <Route 
                     exact path='/note/:noteId'
                     key={'/note/:noteId'}
+                    component={NotePage}
                     // render={(routerProps) => {
                     //     const {noteId} = routerProps.match.params;
                     //     const note = findNoteInfo(notes, noteId);
@@ -132,8 +124,8 @@ class App extends Component {
                     //         {...routerProps} 
                     //         note={note}/>
                     // }}
-                    component={NotePage}
-                  /> */}
+                    
+                  />
               </main>
           </div>
         </NotesContext.Provider> 

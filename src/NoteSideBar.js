@@ -4,6 +4,9 @@ import NotesContext from './NotesContext';
 class NoteSideBar extends Component {
 
     static defaultProps = {
+        history: {
+            goBack: () => { }
+        },
         match: {
             params: {}
         }
@@ -23,8 +26,8 @@ class NoteSideBar extends Component {
 
         return ( 
             <>
-                <button type="button" onClick={() => this.props.history.goBack()}>Go back</button>
-                <h2>{folder.name}</h2>
+                <button type="button" role='link' onClick={() => this.props.history.goBack()}>Go back</button>
+                {folder && (<h2>{folder.name}</h2>)}
             </>
         )
     }

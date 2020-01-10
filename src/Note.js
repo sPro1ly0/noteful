@@ -9,8 +9,8 @@ export default class Note extends React.Component {
   static contextType = NotesContext;
 
   handleClickDelete = e => {
-    e.preventDefault()
-    const noteId = this.props.id
+    e.preventDefault();
+    const noteId = this.props.id;
 
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: 'DELETE',

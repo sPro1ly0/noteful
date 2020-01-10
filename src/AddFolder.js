@@ -10,7 +10,8 @@ class AddFolder extends Component {
             newFolder: {
                 value: '',
                 touched: false
-            }
+            },
+            error: null
         }
     }
 
@@ -31,9 +32,30 @@ class AddFolder extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const name = this.state.newFolder.value;
-        console.log(name);
+        const folderName = this.state.newFolder.value;
+        console.log(folderName);
 
+        fetch(`http://localhost:9090/folders`, {
+            method: 'POST',
+            body: JSON.stringify({name: `${folderName}`}), 
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Something went wrong, please try again later.');
+                }
+                return res.json()
+            })
+            .then(data => {
+                
+                this.context.addNewFolder(data);
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
     }
 
     render() {

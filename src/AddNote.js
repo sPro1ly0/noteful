@@ -6,6 +6,7 @@ class AddNote extends Component {
     handleSubmit(e) {
         e.preventDefault();
         
+        
     }
 
     render() {

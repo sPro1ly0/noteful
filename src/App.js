@@ -74,12 +74,19 @@ class App extends Component {
     });
   };
 
+  addNewNote = note => {
+    this.setState({
+      notes: [ ...this.state.notes, note ]
+    })
+  };
+
   render() {
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.handleDeleteNote,
       addNewFolder: this.addNewFolder,
+      addNewNote: this.addNewNote
     };
 
     return (

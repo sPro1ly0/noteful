@@ -19,8 +19,10 @@ class AddNote extends Component {
             selectedFolder: {
                 value: 'None',
                 touched: false
+            },
+            selectedFolderId: {
+                value: ''
             }
-
         }
     }
 
@@ -42,6 +44,13 @@ class AddNote extends Component {
         this.setState({
             selectedFolder: {value: selectedFolder, touched: true}
         });
+    }
+
+    findFolderId(value) {
+        const selectedFolderName = value;
+        const folder = this.context.folders.find(folder => folder.name === selectedFolderName);
+        const folderId = folder.id;
+        return folderId;
     }
 
     validateNoteName() {
@@ -75,10 +84,12 @@ class AddNote extends Component {
         console.log(newNote);
         console.log(content);
         console.log(selectedFolder);
+        const selectedFolderId = this.findFolderId(selectedFolder.value);
+        console.log(selectedFolderId);
 
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
-            body: JSON.stringify({name: `${newNote.value}`}), 
+            body: JSON.stringify({name: `${newNote.value}`, folderId: `${selectedFolderId}`, content: `${content.value}`}), 
             headers: {
                 'content-type': 'application/json'
             }
@@ -90,7 +101,7 @@ class AddNote extends Component {
                 return res.json()
             })
             .then(data => {
-                this.context.addNewFolder(data);
+                this.context.addNewNote(data);
                 this.props.history.push('/');
             })
             .catch(error => {
@@ -120,7 +131,7 @@ class AddNote extends Component {
                     <label htmlFor="note-content">Content:</label>
                     <input 
                         type="text" 
-                        name="note-content" 
+                        name="note-content"
                         id="note-content" 
                         defaultValue="" 
                         onChange={e => this.updateContent(e.target.value)}/>

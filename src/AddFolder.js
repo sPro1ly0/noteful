@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './AddForms.css';
 import ValidationError from './ValidationError';
+import NotesContext from './NotesContext'
 
 class AddFolder extends Component {
 
@@ -14,6 +15,8 @@ class AddFolder extends Component {
             error: null
         }
     }
+
+    static contextType = NotesContext;
 
     updateNewFolder(newFolder) {
         this.setState({
@@ -49,7 +52,6 @@ class AddFolder extends Component {
                 return res.json()
             })
             .then(data => {
-                
                 this.context.addNewFolder(data);
                 this.props.history.push('/');
             })

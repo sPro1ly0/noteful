@@ -31,3 +31,7 @@ button {
     height: 40px;
     width: 200px;
 }
+
+label:hover, input:hover, select:hover {
+    cursor: pointer;
+}

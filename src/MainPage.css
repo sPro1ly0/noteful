@@ -33,6 +33,7 @@ main > li {
     background-color: white;
     text-align: center;
     border: 1px solid black;
+    padding-top: 20px;
     height: 40px;
     width: 200px;
 }

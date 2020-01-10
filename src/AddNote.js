@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './AddForms.css';
 
 class AddNote extends Component {
 
@@ -12,7 +13,7 @@ class AddNote extends Component {
             <form className="add-note-form">
                 <div>
                     <label htmlFor="new-note">Enter New Note Name:</label>
-                    <input type="text" name="new-note" id="new-note" defaultValue="New Name Here"/>
+                    <input type="text" name="new-note" id="new-note" defaultValue=""/>
                 </div>
                 <div>
                     <label htmlFor="note-content">Content:</label>

@@ -24,6 +24,17 @@
     height: 40px;
 }
 
+.add-folder-button {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 90%;
+    margin: 8px 5%;
+    height: 40px;
+}
+
 .active {
     background-color: lightskyblue;
 }

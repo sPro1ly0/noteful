@@ -1,0 +1,33 @@
+.add-folder-form, .add-note-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+}
+
+.add-note-form {
+    height: 400px;
+}
+
+.add-note-form > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+label {
+    font-size: 1.1em;
+}
+
+input, select {
+    width: 80%;
+    font-size: 1.09em;
+}
+
+button {
+    align-self: flex-start;
+    background-color: white;
+    border: 1px solid black;
+    height: 40px;
+    width: 200px;
+}

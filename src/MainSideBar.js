@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import NotesContext from './NotesContext';
 
 class MainSideBar extends Component {
@@ -14,7 +14,7 @@ class MainSideBar extends Component {
         return ( 
             <>
                 {folderList}
-                <button>Add Folder</button>
+                <Link to='/add-folder' className='add-folder-button'>Add Folder</Link>
             </>
         );
     }

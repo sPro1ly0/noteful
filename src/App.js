@@ -3,10 +3,14 @@ import './App.css';
 
 import MainSidebar from './MainSideBar';
 import NoteSidebar from './NoteSideBar';
+import AddFormsSideBar from './AddFormsSideBar';
 import './SideBar.css';
 
 import MainPage from './MainPage';
 import NotePage from './NotePage';
+
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
 
 //import Store from './Dummy-Store';
 import { Route, Link } from 'react-router-dom';
@@ -18,7 +22,7 @@ class App extends Component {
     folders: [],
     notes: [],
     error: null
-  }
+  };
 
   componentDidMount() {
     Promise.all([
@@ -26,20 +30,27 @@ class App extends Component {
       fetch(`http://localhost:9090/notes`)
     ])
       .then(([foldersResponse, notesResponse]) => {
+          if (!foldersResponse.ok) {
+            throw new Error('Something is wrong with the folders, please try again later.');
+          }
 
-        return foldersResponse.json().then((foldersData) => {
-                  console.log(foldersData);
-                  this.setState({
-                    folders: foldersData
+          if(!notesResponse.ok) {
+            throw new Error('Something is wrong with the notes, please try again later.')
+          }
+
+          return foldersResponse.json().then((foldersData) => {
+                    console.log(foldersData);
+                    this.setState({
+                      folders: foldersData
+                    });
+                  }) &&
+          
+                  notesResponse.json().then((notesData) => {
+                    console.log(notesData);
+                    this.setState({
+                      notes: notesData
+                    });
                   });
-                }) &&
-        
-                notesResponse.json().then((notesData) => {
-                  console.log(notesData);
-                  this.setState({
-                    notes: notesData
-                  });
-                })
 
       })
       .catch(error => {
@@ -91,7 +102,14 @@ class App extends Component {
                     //     const note = findNoteInfo(notes, noteId) || {};
                     //     const folder = findFolder(folders, note.folderId);
                     //     return <NoteSidebar {...routerProps} folder={folder}/> }}
-                    
+                  />
+                  <Route 
+                    path='/add-folder'
+                    component={AddFormsSideBar}
+                  />
+                  <Route 
+                    path='/add-note'
+                    component={AddFormsSideBar}
                   />
               </div>
               <main>
@@ -124,7 +142,14 @@ class App extends Component {
                     //         {...routerProps} 
                     //         note={note}/>
                     // }}
-                    
+                  />
+                  <Route 
+                    path='/add-folder'
+                    component={AddFolder}
+                  />
+                  <Route
+                    path='/add-note'
+                    component={AddNote}
                   />
               </main>
           </div>

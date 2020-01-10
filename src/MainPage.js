@@ -7,16 +7,15 @@ class MainPage extends Component {
     static defaultProps = {
         match: {
             params: {}
-        },
-        onDeleteNote: () => {},
+        }
     }
 
     static contextType = NotesContext;
 
     render() {
         
-        const {folderId} = this.props.match.params;
-        const {notes} = this.context;
+        const { folderId } = this.props.match.params;
+        const { notes } = this.context;
 
         const findNotesInFolder = (notes, folderId) => (
             folderId 

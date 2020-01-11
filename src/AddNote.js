@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './AddForms.css';
 import ValidationError from './ValidationError';
 import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
 
 class AddNote extends Component {
 
@@ -20,9 +21,7 @@ class AddNote extends Component {
                 value: 'None',
                 touched: false
             },
-            selectedFolderId: {
-                value: ''
-            }
+            error: null
         }
     }
 
@@ -58,16 +57,14 @@ class AddNote extends Component {
         if (name.length === 0) {
             return 'Note name is required';
         } else if (name.length > 30) {
-            return 'Folder name must be no longer than 30 characters long.'
+            return 'Name must be no longer than 30 characters long.'
         }
     }
 
     validateContent() {
         const content = this.state.content.value;
-        if (content.length === 0) {
-            return 'Content is required';
-        } else if (content.length > 1000) {
-            return 'Folder name must be no longer than 1000 characters long.'
+        if (content.length > 1000) {
+            return 'Content must be no longer than 1000 characters long.'
         }
     }
 
@@ -81,11 +78,10 @@ class AddNote extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const { newNote, content, selectedFolder } = this.state;
-        console.log(newNote);
-        console.log(content);
-        console.log(selectedFolder);
-        const selectedFolderId = this.findFolderId(selectedFolder.value);
-        console.log(selectedFolderId);
+        const selectedFolderId = this.findFolderId(selectedFolder.value);// console.log(newNote);
+        // console.log(content);
+        // console.log(selectedFolder);
+        // console.log(selectedFolderId);
 
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
@@ -98,14 +94,16 @@ class AddNote extends Component {
                 if (!res.ok) {
                     throw new Error('Something went wrong, please try again later.');
                 }
-                return res.json()
+                return res.json();
             })
             .then(data => {
                 this.context.addNewNote(data);
                 this.props.history.push('/');
             })
             .catch(error => {
-                this.setState({ error })
+                this.setState({ 
+                    error: error.message + " data. Cannot add new note right now." 
+                });
             })
         
     }
@@ -117,6 +115,7 @@ class AddNote extends Component {
 
         return (
             <form className="add-note-form" onSubmit={e => this.handleSubmit(e)}>
+                {this.state.error}
                 <div>
                     <label htmlFor="new-note">Enter New Note Name:</label>
                     <input 
@@ -161,3 +160,7 @@ class AddNote extends Component {
 }
 
 export default AddNote;
+
+AddNote.propTypes = {
+    history: PropTypes.object
+};

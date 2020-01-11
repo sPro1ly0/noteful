@@ -1,11 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
 
 export default class Note extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null
+    };
+  }
+
   static defaultProps ={
     onDeleteNote: () => {},
   }
+  
   static contextType = NotesContext;
 
   handleClickDelete = e => {
@@ -29,12 +39,14 @@ export default class Note extends React.Component {
         this.props.onDeleteNote(noteId)
       })
       .catch(error => {
-        console.error({ error })
+        this.setState({ 
+          error: error.message + " data. Cannot delete note right now." 
+        });
       })
   }
 
   render() {
-    const { name, id, modified } = this.props
+    const { name, id, modified } = this.props;
     return (
         <>
             <li key={id}>
@@ -43,6 +55,7 @@ export default class Note extends React.Component {
                         {name}
                     </Link>
                 </h2>
+                {this.state.error}
                 <div className='note-date-button'>
                     <p>Date modified on {modified}</p>
                     <button
@@ -52,6 +65,20 @@ export default class Note extends React.Component {
                 </div>
             </li>
         </>
-    )
+    );
   }
 }
+
+Note.defaultProps = {
+  name: '',
+  modified: '',
+  id: '',
+  onDeleteNote: () => {}
+}
+
+Note.propTypes = {
+  name: PropTypes.string.isRequired,
+  modified: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  onDeleteNote: PropTypes.func.isRequired
+};

@@ -19,3 +19,7 @@ a {
 a:hover {
     color: orangered;
 }
+
+p {
+    text-align: center;
+}

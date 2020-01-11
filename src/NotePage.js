@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Note from './Note';
 import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
 
 class NotePage extends Component {
 
@@ -15,7 +16,7 @@ class NotePage extends Component {
 
     handleDeleteNote = noteId => {
         this.props.history.push('/')
-    }
+    };
 
     render() {
         const {notes} = this.context;
@@ -41,3 +42,8 @@ class NotePage extends Component {
 }
 
 export default NotePage;
+
+NotePage.propTypes = {
+    match: PropTypes.object.isRequired,
+    onDeleteNote: PropTypes.func
+}

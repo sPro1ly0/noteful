@@ -3,6 +3,7 @@ import './MainPage.css';
 import NotesContext from './NotesContext';
 import Note from './Note';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class MainPage extends Component {
     static defaultProps = {
@@ -43,3 +44,7 @@ class MainPage extends Component {
 }
 
 export default MainPage;
+
+MainPage.propTypes = {
+    match: PropTypes.object.isRequired
+};

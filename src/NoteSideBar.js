@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
 
 class NoteSideBar extends Component {
 
@@ -34,3 +35,8 @@ class NoteSideBar extends Component {
 }
 
 export default NoteSideBar;
+
+NoteSideBar.propTypes = {
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
+}

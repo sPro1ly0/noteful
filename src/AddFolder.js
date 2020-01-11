@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './AddForms.css';
 import ValidationError from './ValidationError';
-import NotesContext from './NotesContext'
+import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
 
 class AddFolder extends Component {
 
@@ -56,13 +57,16 @@ class AddFolder extends Component {
                 this.props.history.push('/');
             })
             .catch(error => {
-                this.setState({ error })
+                this.setState({ 
+                    error: error.message + " data. Cannot add new folder right now."
+                });
             })
     }
 
     render() {
         return (
             <form className="add-folder-form" onSubmit={ e=> this.handleSubmit(e)}>
+                {this.state.error}
                 <label htmlFor="newFolder">Enter New Folder Name:</label>
                 <input 
                     type="text" 
@@ -78,8 +82,12 @@ class AddFolder extends Component {
                     }
                 >+ Add New Folder</button>
             </form>
-        )
+        );
     }
 }
 
 export default AddFolder;
+
+AddFolder.propTypes = {
+    history: PropTypes.object
+};

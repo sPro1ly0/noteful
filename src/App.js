@@ -15,6 +15,7 @@ import AddNote from './AddNote';
 //import Store from './Dummy-Store';
 import { Route, Link } from 'react-router-dom';
 import NotesContext from './NotesContext';
+import NotefulAppError from './NotefulAppError';
 
 class App extends Component {
 
@@ -54,10 +55,10 @@ class App extends Component {
 
       })
       .catch(error => {
-        console.log('Error', error)
+        console.log('Error:', error);
         this.setState({
-          error: error.message
-        })
+          error: error.message + " data. Try again later."
+        });
       })
   };
 
@@ -68,16 +69,19 @@ class App extends Component {
     });
   };
 
-  addNewFolder = folder => {
+  addNewFolder = newFolder => {
+    const addingFolders = this.state.folders.map(folder => (folder.name === newFolder.name)
+          ? folder
+          : newFolder)
     this.setState({
-      folders: [ ...this.state.folders, folder ]
+      folders: addingFolders
     });
   };
 
   addNewNote = note => {
     this.setState({
       notes: [ ...this.state.notes, note ]
-    })
+    });
   };
 
   render() {
@@ -94,80 +98,65 @@ class App extends Component {
         <header>
             <Link to='/'><h1>Noteful</h1></Link>
         </header>
-        <NotesContext.Provider value={contextValue}>
-          <div className='main-section'>
-              <div className='side-navbar'>
-                  <Route 
-                    exact path='/'
-                    key={'/'}
-                    component={MainSidebar}
-                  />
-                  <Route 
-                    exact path='/folder/:folderId'
-                    key={'/folder/:folderId'}
-                    component={MainSidebar}
-                  />
-                  <Route 
-                    exact path='/note/:noteId'
-                    key={'/note/:noteId'}
-                    component={NoteSidebar}
-                    // render={(routerProps) => {
-                    //     const {noteId} = routerProps.match.params;
-                    //     const note = findNoteInfo(notes, noteId) || {};
-                    //     const folder = findFolder(folders, note.folderId);
-                    //     return <NoteSidebar {...routerProps} folder={folder}/> }}
-                  />
-                  <Route 
-                    path='/add-folder'
-                    component={AddFormsSideBar}
-                  />
-                  <Route 
-                    path='/add-note'
-                    component={AddFormsSideBar}
-                  />
-              </div>
-              <main>
-                  <Route 
-                    exact path='/'
-                    key={'/'}
-                    component={MainPage}
+        <p>{this.state.error}</p>
+          <NotesContext.Provider value={contextValue}>
+            <div className='main-section'>
+                <div className='side-navbar'>
+                  <NotefulAppError>
+                      <Route 
+                        exact path='/'
+                        key={'/'}
+                        component={MainSidebar}
+                      />
+                      <Route 
+                        exact path='/folder/:folderId'
+                        key={'/folder/:folderId'}
+                        component={MainSidebar}
+                      />
+                      <Route 
+                        exact path='/note/:noteId'
+                        key={'/note/:noteId'}
+                        component={NoteSidebar}
+                      />
+                      <Route 
+                        path='/add-folder'
+                        component={AddFormsSideBar}
+                      />
+                      <Route 
+                        path='/add-note'
+                        component={AddFormsSideBar}
+                      />
+                  </NotefulAppError> 
+                </div>
+                <main>
+                  <NotefulAppError>
+                    <Route 
+                      exact path='/'
+                      key={'/'}
+                      component={MainPage}
+                      />
+                    <Route
+                      exact path='/folder/:folderId'
+                      key={'/folder/:folderId'}
+                      component={MainPage}
                     />
-                  <Route
-                    exact path='/folder/:folderId'
-                    key={'/folder/:folderId'}
-                    component={MainPage}
-                    // render={(routerProps) => {
-                    //     const {folderId} = routerProps.match.params;
-                    //     const notesInFolder = findNotesInFolder(notes, folderId);
-                    //   return (<MainPage
-                    //       {...routerProps} 
-                    //       notes={notesInFolder} />
-                    //   );
-                    // }}
-                  />
-                  <Route 
-                    exact path='/note/:noteId'
-                    key={'/note/:noteId'}
-                    component={NotePage}
-                    // render={(routerProps) => {
-                    //     const {noteId} = routerProps.match.params;
-                    //     const note = findNoteInfo(notes, noteId);
-                    //     return <NotePage 
-                    //         {...routerProps} 
-                    //         note={note}/>
-                    // }}
-                  />
-                  <Route 
-                    path='/add-folder'
-                    component={AddFolder}
-                  />
-                  <Route
-                    path='/add-note'
-                    component={AddNote}
-                  />
-              </main>
-          </div>
-        </NotesContext.Provider> 
+                    <Route 
+                      exact path='/note/:noteId'
+                      key={'/note/:noteId'}
+                      component={NotePage}
+                    />
+                    <Route 
+                      path='/add-folder'
+                      component={AddFolder}
+                    />
+                    <Route
+                      path='/add-note'
+                      component={AddNote}
+                    />
+                  </NotefulAppError> 
+                </main>
+            </div>
+          </NotesContext.Provider> 
       </div>
     );
   }

@@ -20,6 +20,6 @@ a:hover {
     color: orangered;
 }
 
-p {
+.error-message {
     text-align: center;
 }

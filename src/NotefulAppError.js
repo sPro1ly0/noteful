@@ -6,7 +6,7 @@ class NotefulAppError extends Component {
         this.state = {
             hasError: false
         };
-    }
+    };
 
     static getDerivedStateFromError() {
         return { hasError: true };
@@ -29,4 +29,4 @@ class NotefulAppError extends Component {
     }
 }
 
-export default NotefulAppError
+export default NotefulAppError;

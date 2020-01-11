@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Route, Link } from 'react-router-dom';
 
+//SideBar Components
 import MainSidebar from './MainSideBar';
 import NoteSidebar from './NoteSideBar';
 import AddFormsSideBar from './AddFormsSideBar';
 import './SideBar.css';
 
+//MainPage Components for Note List and Indiviual Note Content
 import MainPage from './MainPage';
 import NotePage from './NotePage';
 
+//Add Folder and Add Note Forms
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
 
-//import Store from './Dummy-Store';
-import { Route, Link } from 'react-router-dom';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import NotefulAppError from './NotefulAppError';
 
 class App extends Component {
@@ -36,7 +38,7 @@ class App extends Component {
           }
 
           if(!notesResponse.ok) {
-            throw new Error('Something is wrong with the notes, please try again later.')
+            throw new Error('Something is wrong with the notes, please try again later.');
           }
 
           return foldersResponse.json().then((foldersData) => {
@@ -70,11 +72,8 @@ class App extends Component {
   };
 
   addNewFolder = newFolder => {
-    const addingFolders = this.state.folders.map(folder => (folder.name === newFolder.name)
-          ? folder
-          : newFolder)
     this.setState({
-      folders: addingFolders
+      folders: [ ...this.state.folders, newFolder ]
     });
   };
 
@@ -98,8 +97,8 @@ class App extends Component {
         <header>
             <Link to='/'><h1>Noteful</h1></Link>
         </header>
-        <p>{this.state.error}</p>
-          <NotesContext.Provider value={contextValue}>
+        <p className='error-message'>{this.state.error}</p>
+          <NotefulContext.Provider value={contextValue}>
             <div className='main-section'>
                 <div className='side-navbar'>
                   <NotefulAppError>
@@ -156,7 +155,7 @@ class App extends Component {
                   </NotefulAppError> 
                 </main>
             </div>
-          </NotesContext.Provider> 
+          </NotefulContext.Provider> 
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './AddForms.css';
 import ValidationError from './ValidationError';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import PropTypes from 'prop-types';
 
 class AddNote extends Component {
@@ -25,60 +25,61 @@ class AddNote extends Component {
         }
     }
 
-    static contextType = NotesContext;
+    static contextType = NotefulContext;
     
     updateNewNote(newNote) {
         this.setState({
             newNote: {value: newNote, touched: true}
         });
-    }
+    };
     
     updateContent(content) {
         this.setState({
             content: {value: content, touched: true}
         });
-    }
+    };
 
     updateSelectedFolder(selectedFolder) {
         this.setState({
             selectedFolder: {value: selectedFolder, touched: true}
         });
-    }
+    };
 
     findFolderId(value) {
         const selectedFolderName = value;
         const folder = this.context.folders.find(folder => folder.name === selectedFolderName);
         const folderId = folder.id;
         return folderId;
-    }
+    };
 
     validateNoteName() {
         const name = this.state.newNote.value;
         if (name.length === 0) {
             return 'Note name is required';
         } else if (name.length > 30) {
-            return 'Name must be no longer than 30 characters long.'
-        }
-    }
+            return 'Name must be no longer than 30 characters long.';
+        };
+    };
 
     validateContent() {
         const content = this.state.content.value;
         if (content.length > 1000) {
-            return 'Content must be no longer than 1000 characters long.'
-        }
-    }
+            return 'Content must be no longer than 1000 characters long.';
+        };
+    };
 
     validateSelectedFolder() {
         const selectedFolder = this.state.selectedFolder.value;
         if (selectedFolder === 'None') {
-            return 'Please select a folder.'
-        }
-    }
+            return 'Please select a folder.';
+        };
+    };
 
     handleSubmit(event) {
         event.preventDefault();
         const { newNote, content, selectedFolder } = this.state;
-        const selectedFolderId = this.findFolderId(selectedFolder.value);// console.log(newNote);
+        const selectedFolderId = this.findFolderId(selectedFolder.value);
+        // console.log(newNote);
         // console.log(content);
         // console.log(selectedFolder);
         // console.log(selectedFolderId);

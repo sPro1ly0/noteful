@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import PropTypes from 'prop-types';
 
 class NoteSideBar extends Component {
@@ -13,7 +13,7 @@ class NoteSideBar extends Component {
         }
     };
 
-    static contextType = NotesContext;
+    static contextType = NotefulContext;
 
     render() {
         const {folders, notes} = this.context;
@@ -30,7 +30,7 @@ class NoteSideBar extends Component {
                 <button type="button" role='link' onClick={() => this.props.history.goBack()}>Go back</button>
                 {folder && (<h2>{folder.name}</h2>)}
             </>
-        )
+        );
     }
 }
 
@@ -39,4 +39,4 @@ export default NoteSideBar;
 NoteSideBar.propTypes = {
     history: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired
-}
+};

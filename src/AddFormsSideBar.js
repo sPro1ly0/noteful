@@ -14,7 +14,7 @@ class AddFormsSideBar extends Component {
             <>
                 <button type="button" role='link' onClick={() => this.props.history.goBack()}>Go back</button>
             </>
-        )
+        );
     }
 }
 

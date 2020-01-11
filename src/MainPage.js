@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './MainPage.css';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import Note from './Note';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,9 +10,9 @@ class MainPage extends Component {
         match: {
             params: {}
         }
-    }
+    };
 
-    static contextType = NotesContext;
+    static contextType = NotefulContext;
 
     render() {
         
@@ -32,7 +32,7 @@ class MainPage extends Component {
                     name={note.name}
                     modified={note.modified}
                 />
-            )
+            );
             
         return (
             <>

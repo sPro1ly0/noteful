@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import PropTypes from 'prop-types';
 
 export default class Note extends React.Component {
@@ -10,13 +10,13 @@ export default class Note extends React.Component {
     this.state = {
       error: null
     };
-  }
+  };
 
   static defaultProps ={
     onDeleteNote: () => {},
-  }
-  
-  static contextType = NotesContext;
+  };
+
+  static contextType = NotefulContext;
 
   handleClickDelete = e => {
     e.preventDefault();
@@ -29,14 +29,15 @@ export default class Note extends React.Component {
       },
     })
       .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
+        if (!res.ok) {
+          return res.json().then(e => Promise.reject(e));
+        }
+        return res.json();
       })
       .then(() => {
-        this.context.deleteNote(noteId)
+        this.context.deleteNote(noteId);
         // allow parent to perform extra behaviour
-        this.props.onDeleteNote(noteId)
+        this.props.onDeleteNote(noteId);
       })
       .catch(error => {
         this.setState({ 
@@ -74,7 +75,7 @@ Note.defaultProps = {
   modified: '',
   id: '',
   onDeleteNote: () => {}
-}
+};
 
 Note.propTypes = {
   name: PropTypes.string.isRequired,

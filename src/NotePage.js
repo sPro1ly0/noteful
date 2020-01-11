@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import PropTypes from 'prop-types';
 
 class NotePage extends Component {
@@ -10,9 +10,9 @@ class NotePage extends Component {
             params:{}
         },
         onDeleteNote: () => {},
-    }
+    };
 
-    static contextType = NotesContext;
+    static contextType = NotefulContext;
 
     handleDeleteNote = noteId => {
         this.props.history.push('/')
@@ -22,7 +22,7 @@ class NotePage extends Component {
         const {notes} = this.context;
         const {noteId} = this.props.match.params;
         const findNoteInfo = (notes, noteId) => notes.find(note => note.id === noteId);
-        const note = findNoteInfo(notes, noteId) || { content: ''}
+        const note = findNoteInfo(notes, noteId) || { content: ''};
 
         return (
             <>
@@ -46,4 +46,4 @@ export default NotePage;
 NotePage.propTypes = {
     match: PropTypes.object.isRequired,
     onDeleteNote: PropTypes.func
-}
+};

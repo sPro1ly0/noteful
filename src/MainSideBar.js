@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 
 class MainSideBar extends Component {
 
-    static contextType = NotesContext;
+    static contextType = NotefulContext;
 
     render() {
         const folderList = this.context.folders.map((folder) =>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './AddForms.css';
 import ValidationError from './ValidationError';
-import NotesContext from './NotesContext';
+import NotefulContext from './NotefulContext';
 import PropTypes from 'prop-types';
 
 class AddFolder extends Component {
@@ -14,25 +14,25 @@ class AddFolder extends Component {
                 touched: false
             },
             error: null
-        }
-    }
+        };
+    };
 
-    static contextType = NotesContext;
+    static contextType = NotefulContext;
 
     updateNewFolder(newFolder) {
         this.setState({
             newFolder: {value: newFolder, touched: true}
         });
-    }
+    };
 
     validateFolderName(fieldValue) {
         const name = this.state.newFolder.value;
         if (name.length === 0) {
             return 'A folder name is required';
         } else if (name.length > 25) {
-            return 'Folder name must be no longer than 25 characters long.'
-        }
-    }
+            return 'Folder name must be no longer than 25 characters long.';
+        };
+    };
 
     handleSubmit(event) {
         event.preventDefault();
@@ -50,7 +50,7 @@ class AddFolder extends Component {
                 if (!res.ok) {
                     throw new Error('Something went wrong, please try again later.');
                 }
-                return res.json()
+                return res.json();
             })
             .then(data => {
                 this.context.addNewFolder(data);

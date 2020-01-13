@@ -86,7 +86,12 @@ class AddNote extends Component {
 
         fetch(`http://localhost:9090/notes`, {
             method: 'POST',
-            body: JSON.stringify({name: `${newNote.value}`, folderId: `${selectedFolderId}`, content: `${content.value}`}), 
+            body: JSON.stringify({
+                name: `${newNote.value}`,
+                modified: new Date(), 
+                folderId: `${selectedFolderId}`, 
+                content: `${content.value}`
+            }), 
             headers: {
                 'content-type': 'application/json'
             }

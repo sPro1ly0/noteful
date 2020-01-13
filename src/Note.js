@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 export default class Note extends React.Component {
 
@@ -48,6 +49,9 @@ export default class Note extends React.Component {
 
   render() {
     const { name, id, modified } = this.props;
+    //console.log(modified); example: 2018-04-26T23:00:00.000Z
+    const modifiedTime = moment(`${ modified }`).format("Do MMM YYYY");
+    //console.log(modifiedTime); example: 26th Apr 2018
     return (
         <>
             <li key={id}>
@@ -58,7 +62,7 @@ export default class Note extends React.Component {
                 </h2>
                 {this.state.error}
                 <div className='note-date-button'>
-                    <p>Date modified on {modified}</p>
+                    <p>Date modified on {modifiedTime}</p>
                     <button
                         onClick={this.handleClickDelete}
                     >

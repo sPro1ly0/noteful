@@ -71,10 +71,14 @@ class AddFolder extends Component {
                 <input 
                     type="text" 
                     name="newFolder" 
-                    id="newFolder" 
+                    id="newFolder"
+                    aria-label="Enter a new name for folder"
+                    aria-required="true"
+                    aria-describedby="folderNameRequired"
                     defaultValue=""
                     onChange={(e) => this.updateNewFolder(e.target.value)}/>
                 {this.state.newFolder.touched && (<ValidationError message={this.validateFolderName()}/>)}
+                <div id="folderNameRequired">A folder name is required and should be no longer than 25 characters</div>
                 <button 
                     type="submit"
                     disabled={

@@ -39,3 +39,7 @@
 .active {
     background-color: lightskyblue;
 }
+
+.folder:hover, .folder:focus {
+    background-color: lightskyblue;
+}

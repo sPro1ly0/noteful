@@ -26,16 +26,18 @@ class NotePage extends Component {
 
         return (
             <>
-                <Note
-                    id={note.id}
-                    name={note.name}
-                    modified={note.modified}
-                    onDeleteNote={this.handleDeleteNote}
-                    />
-
+                <ul>
+                    <Note
+                        id={note.id}
+                        name={note.name}
+                        modified={note.modified}
+                        onDeleteNote={this.handleDeleteNote}
+                        />
+                </ul>
                 <p>
                     {note.content}
                 </p>
+            
             </>
         )
     }

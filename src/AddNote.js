@@ -127,31 +127,43 @@ class AddNote extends Component {
                     <input 
                         type="text" 
                         name="new-note" 
-                        id="new-note" 
+                        id="new-note"
+                        aria-label="Enter a new name for note"
+                        aria-required="true"
+                        aria-describedby="noteNameRequired" 
                         defaultValue=""
                         onChange={e => this.updateNewNote(e.target.value)}/>
                     {this.state.newNote.touched && (<ValidationError message={this.validateNoteName()}/>)}
+                    <div id="noteNameRequired">New note name is required.</div>
                 </div>
                 <div>
                     <label htmlFor="note-content">Content:</label>
                     <input 
                         type="text" 
                         name="note-content"
-                        id="note-content" 
+                        id="note-content"
+                        aria-label="Enter content for new note"
+                        aria-required="false"
+                        aria-describedby="noteContent" 
                         defaultValue="" 
                         onChange={e => this.updateContent(e.target.value)}/>
                     {this.state.content.touched && (<ValidationError message={this.validateContent()}/>)}
+                    <div id="noteContent">Note content is optional.</div>
                 </div>
                 <div>
                     <label htmlFor="note-folder">Folder:</label>
                     <select 
                         name="note-folder" 
                         id="note-folder"
+                        aria-label="Select a folder to put your new note in"
+                        aria-required="true"
+                        aria-describedby="noteFolderSelection"
                         onChange={e => this.updateSelectedFolder(e.target.value)}>
                         <option value="None">Select Folder</option>
                         {folderOptions}
                     </select>
                     {this.state.selectedFolder.touched && (<ValidationError message={this.validateSelectedFolder()}/>)}
+                    <div id="noteFolderSelection">Select a folder is required.</div>
                 </div>
                 <button 
                     type="submit"

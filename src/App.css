@@ -16,10 +16,16 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+a:hover, a:focus {
     color: orangered;
 }
 
 .error-message {
     text-align: center;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }

@@ -37,7 +37,9 @@ class MainPage extends Component {
             
         return (
             <>
-                {notesList}
+                <ul>
+                    {notesList}
+                </ul>
                 <Link to='/add-note' className='add-note-button'>Add Note</Link>
             </>
         )

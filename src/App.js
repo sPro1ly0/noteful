@@ -95,12 +95,12 @@ class App extends Component {
     return (
       <div className='App'>
         <header>
-            <Link to='/'><h1>Noteful</h1></Link>
+            <Link to='/' tabIndex={0} ><h1>Noteful</h1></Link>
         </header>
         <p className='error-message'>{this.state.error}</p>
           <NotefulContext.Provider value={contextValue}>
             <div className='main-section'>
-                <div className='side-navbar'>
+                <nav className='side-navbar'>
                   <NotefulAppError>
                       <Route 
                         exact path='/'
@@ -126,32 +126,32 @@ class App extends Component {
                         component={AddFormsSideBar}
                       />
                   </NotefulAppError> 
-                </div>
+                </nav>
                 <main>
-                  <NotefulAppError>
-                    <Route 
-                      exact path='/'
-                      key={'/'}
-                      component={MainPage}
+                    <NotefulAppError>
+                      <Route 
+                        exact path='/'
+                        key={'/'}
+                        component={MainPage}
+                        />
+                      <Route
+                        exact path='/folder/:folderId'
+                        key={'/folder/:folderId'}
+                        component={MainPage}
                       />
-                    <Route
-                      exact path='/folder/:folderId'
-                      key={'/folder/:folderId'}
-                      component={MainPage}
-                    />
-                    <Route 
-                      exact path='/note/:noteId'
-                      key={'/note/:noteId'}
-                      component={NotePage}
-                    />
-                    <Route 
-                      path='/add-folder'
-                      component={AddFolder}
-                    />
-                    <Route
-                      path='/add-note'
-                      component={AddNote}
-                    />
+                      <Route 
+                        exact path='/note/:noteId'
+                        key={'/note/:noteId'}
+                        component={NotePage}
+                      />
+                      <Route 
+                        path='/add-folder'
+                        component={AddFolder}
+                      />
+                      <Route
+                        path='/add-note'
+                        component={AddNote}
+                      />
                   </NotefulAppError> 
                 </main>
             </div>

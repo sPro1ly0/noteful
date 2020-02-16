@@ -47,7 +47,7 @@ class AddNote extends Component {
 
     findFolderId(value) {
         const selectedFolderName = value;
-        const folder = this.context.folders.find(folder => folder.name === selectedFolderName);
+        const folder = this.context.folders.find(folder => folder.folder_name === selectedFolderName);
         const folderId = folder.id;
         return folderId;
     };
@@ -84,12 +84,12 @@ class AddNote extends Component {
         // console.log(selectedFolder);
         // console.log(selectedFolderId);
 
-        fetch(`http://localhost:9090/notes`, {
+        fetch(`http://localhost:8000/api/notes`, {
             method: 'POST',
             body: JSON.stringify({
-                name: `${newNote.value}`,
-                modified: new Date(), 
-                folderId: `${selectedFolderId}`, 
+                note_name: `${newNote.value}`,
+                date_modified: new Date(), 
+                folder_id: `${selectedFolderId}`, 
                 content: `${content.value}`
             }), 
             headers: {
@@ -116,7 +116,7 @@ class AddNote extends Component {
 
     render() {
         const folderOptions = this.context.folders.map((folder) =>
-            <option className="folder" key={folder.id}>{folder.name}</option> 
+            <option className="folder" key={folder.id}>{folder.folder_name}</option> 
         );
 
         return (

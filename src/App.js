@@ -29,8 +29,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`http://localhost:9090/folders`),
-      fetch(`http://localhost:9090/notes`)
+      fetch(`http://localhost:8000/api/folders`),
+      fetch(`http://localhost:8000/api/notes`)
     ])
       .then(([foldersResponse, notesResponse]) => {
           if (!foldersResponse.ok) {
@@ -95,7 +95,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header>
-            <Link to='/' tabIndex={0} ><h1>Noteful</h1></Link>
+            <Link to='/' tabIndex="0" ><h1>Noteful</h1></Link>
         </header>
         <p className='error-message'>{this.state.error}</p>
           <NotefulContext.Provider value={contextValue}>

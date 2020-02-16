@@ -39,9 +39,9 @@ class AddFolder extends Component {
         const folderName = this.state.newFolder.value;
         console.log(folderName);
 
-        fetch(`http://localhost:9090/folders`, {
+        fetch(`http://localhost:8000/api/folders`, {
             method: 'POST',
-            body: JSON.stringify({name: `${folderName}`}), 
+            body: JSON.stringify({folder_name: `${folderName}`}), 
             headers: {
                 'content-type': 'application/json'
             }

@@ -22,7 +22,7 @@ class MainPage extends Component {
 
         const findNotesInFolder = (notes, folderId) => (
             folderId 
-                ? notes.filter(note => note.folderId === folderId)
+                ? notes.filter(note => note.folder_id === Number(folderId))
                 : notes);
 
         const notesInFolder = findNotesInFolder(notes, folderId);        
@@ -30,8 +30,8 @@ class MainPage extends Component {
                 <Note 
                     key={note.id}
                     id={note.id}
-                    name={note.name}
-                    modified={note.modified}
+                    name={note.note_name}
+                    modified={note.date_modified}
                 />
             );
             

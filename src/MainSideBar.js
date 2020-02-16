@@ -8,7 +8,7 @@ class MainSideBar extends Component {
 
     render() {
         const folderList = this.context.folders.map((folder) =>
-            <NavLink to ={`/folder/${folder.id}`} className="folder" key={folder.id}>{folder.name}</NavLink> 
+            <NavLink to ={`/folder/${folder.id}`} className="folder" key={folder.id}>{folder.folder_name}</NavLink> 
         );
 
         return ( 

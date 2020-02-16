@@ -21,7 +21,7 @@ class NotePage extends Component {
     render() {
         const {notes} = this.context;
         const {noteId} = this.props.match.params;
-        const findNoteInfo = (notes, noteId) => notes.find(note => note.id === noteId);
+        const findNoteInfo = (notes, noteId) => notes.find(note => note.id === Number(noteId));
         const note = findNoteInfo(notes, noteId) || { content: ''};
 
         return (
@@ -29,8 +29,8 @@ class NotePage extends Component {
                 <ul>
                     <Note
                         id={note.id}
-                        name={note.name}
-                        modified={note.modified}
+                        name={note.note_name}
+                        modified={note.date_modified}
                         onDeleteNote={this.handleDeleteNote}
                         />
                 </ul>

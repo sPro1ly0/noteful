@@ -19,16 +19,16 @@ class NoteSideBar extends Component {
         const {folders, notes} = this.context;
         const {noteId} = this.props.match.params;
 
-        const findNoteInfo = (notes, noteId) => notes.find(note => note.id === noteId);
+        const findNoteInfo = (notes, noteId) => notes.find(note => note.id === Number(noteId));
         const findFolder = (folders, folderId) => folders.find(folder => folder.id === folderId);
         
         const note = findNoteInfo(notes, noteId) || {};
-        const folder = findFolder(folders, note.folderId);
+        const folder = findFolder(folders, note.folder_id);
 
         return ( 
             <>
                 <button type="button" role='link' onClick={() => this.props.history.goBack()}>Go back</button>
-                {folder && (<h2>{folder.name}</h2>)}
+                {folder && (<h2>{folder.folder_name}</h2>)}
             </>
         );
     }

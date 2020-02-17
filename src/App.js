@@ -29,8 +29,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`http://localhost:8000/api/folders`),
-      fetch(`http://localhost:8000/api/notes`)
+      fetch(`https://stark-savannah-11115.herokuapp.com/api/folders`),
+      fetch(`https://stark-savannah-11115.herokuapp.com/api/notes`)
     ])
       .then(([foldersResponse, notesResponse]) => {
           if (!foldersResponse.ok) {

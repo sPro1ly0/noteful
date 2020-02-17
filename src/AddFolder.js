@@ -39,7 +39,7 @@ class AddFolder extends Component {
         const folderName = this.state.newFolder.value;
         console.log(folderName);
 
-        fetch(`http://localhost:8000/api/folders`, {
+        fetch(`https://stark-savannah-11115.herokuapp.com/api/folders`, {
             method: 'POST',
             body: JSON.stringify({folder_name: `${folderName}`}), 
             headers: {

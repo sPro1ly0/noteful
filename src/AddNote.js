@@ -84,7 +84,7 @@ class AddNote extends Component {
         // console.log(selectedFolder);
         // console.log(selectedFolderId);
 
-        fetch(`http://localhost:8000/api/notes`, {
+        fetch(`https://stark-savannah-11115.herokuapp.com/api/notes`, {
             method: 'POST',
             body: JSON.stringify({
                 note_name: `${newNote.value}`,

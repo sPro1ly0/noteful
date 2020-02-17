@@ -1,0 +1,9 @@
+{  
+  "version": 2,
+  "alias": "sbecka81111-noteful",
+  "name": "noteful",
+  "routes": [
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.html" }
+  ]
+}
